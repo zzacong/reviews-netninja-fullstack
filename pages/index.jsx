@@ -1,15 +1,29 @@
 import Link from 'next/link'
-import { useFetch } from '../lib/hooks'
+import { useQuery, gql } from '@apollo/client'
+
+// import { useFetch } from '../lib/hooks'
+
+const REVIEWS = gql`
+  query GetReviews {
+    reviews {
+      id
+      title
+      rating
+      body
+    }
+  }
+`
 
 export default function HomePage() {
-  const { data, loading, error } = useFetch('/reviews')
+  // const { data, loading, error } = useFetch('/reviews') // REST API
+  const { data, loading, error } = useQuery(REVIEWS) // GRAPHQL
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
 
   return (
     <div>
-      {data.map(review => (
+      {data.reviews.map(review => (
         <div key={review.id} className="review-card">
           <div className="rating">{review.rating}</div>
           <h2>{review.title}</h2>
