@@ -35,7 +35,7 @@ export default function HomePage() {
             <small key={c.id}>{c.name}</small>
           ))}
           <p>{r.body.slice(0, 200)}...</p>
-          <Link href={`/details/${r.id}`}>Read more</Link>
+          <Link href={`/reviews/${r.id}`}>Read more</Link>
         </div>
       ))}
     </div>
