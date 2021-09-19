@@ -13,5 +13,8 @@
     "@keystone-next/fields-document": "^9.0.0",
     "@keystone-next/keystone": "^25.0.3",
     "typescript": "^4.4.3"
+  },
+  "engines": {
+    "node": "14.x.x"
   }
 }
