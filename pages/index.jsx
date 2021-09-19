@@ -10,6 +10,10 @@ const REVIEWS = gql`
       title
       rating
       body
+      categories {
+        id
+        name
+      }
     }
   }
 `
@@ -23,13 +27,15 @@ export default function HomePage() {
 
   return (
     <div>
-      {data.reviews.map(review => (
-        <div key={review.id} className="review-card">
-          <div className="rating">{review.rating}</div>
-          <h2>{review.title}</h2>
-          <small>console list</small>
-          <p>{review.body.slice(0, 200)}...</p>
-          <Link href={`/details/${review.id}`}>Read more</Link>
+      {data.reviews.map(r => (
+        <div key={r.id} className="review-card">
+          <div className="rating">{r.rating}</div>
+          <h2>{r.title}</h2>
+          {r.categories.map(c => (
+            <small key={c.id}>{c.name}</small>
+          ))}
+          <p>{r.body.slice(0, 200)}...</p>
+          <Link href={`/details/${r.id}`}>Read more</Link>
         </div>
       ))}
     </div>

@@ -26,7 +26,7 @@ export default function SiteHeader() {
       <nav className="categories">
         <span>Filter reviews by category:</span>
         {data.categories.map(c => (
-          <Link key={c.id} href={`/categories/${c.id}`}>
+          <Link key={c.id} href={`/category/${c.id}`}>
             {c.name}
           </Link>
         ))}
