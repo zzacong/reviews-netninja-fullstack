@@ -23,6 +23,13 @@ export default withAuth(
     server: {
       port: 5000,
     },
+    images: {
+      upload: 'local',
+      local: {
+        storagePath: 'public/images',
+        baseUrl: '/images',
+      },
+    },
     lists,
     session,
   })

@@ -1,12 +1,13 @@
-import { createSchema, list } from '@keystone-next/keystone';
+import { createSchema, list } from '@keystone-next/keystone'
 import {
   text,
   relationship,
   password,
   timestamp,
   select,
-} from '@keystone-next/keystone/fields';
-import { document } from '@keystone-next/fields-document';
+  image,
+} from '@keystone-next/keystone/fields'
+import { document } from '@keystone-next/fields-document'
 
 export const lists = createSchema({
   User: list({
@@ -73,6 +74,7 @@ export const lists = createSchema({
         },
         many: true,
       }),
+      image: image(),
     },
   }),
   Tag: list({
@@ -87,4 +89,4 @@ export const lists = createSchema({
       }),
     },
   }),
-});
+})

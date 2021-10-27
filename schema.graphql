@@ -184,14 +184,42 @@ type Post {
     skip: Int! = 0
   ): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
+  image: ImageFieldOutput
 }
 
 type Post_content_DocumentField {
   document(hydrateRelationships: Boolean! = false): JSON!
 }
 
+interface ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  src: String!
+}
+
+enum ImageExtension {
+  jpg
+  png
+  webp
+  gif
+}
+
 input PostWhereUniqueInput {
   id: ID
+}
+
+type LocalImageFieldOutput implements ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  src: String!
 }
 
 input PostWhereInput {
@@ -212,6 +240,7 @@ input PostUpdateInput {
   publishDate: String
   author: UserRelateToOneForUpdateInput
   tags: TagRelateToManyForUpdateInput
+  image: ImageFieldInput
 }
 
 input UserRelateToOneForUpdateInput {
@@ -227,6 +256,16 @@ input TagRelateToManyForUpdateInput {
   connect: [TagWhereUniqueInput!]
 }
 
+input ImageFieldInput {
+  upload: Upload
+  ref: String
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
 input PostUpdateArgs {
   where: PostWhereUniqueInput!
   data: PostUpdateInput!
@@ -239,6 +278,7 @@ input PostCreateInput {
   publishDate: String
   author: UserRelateToOneForCreateInput
   tags: TagRelateToManyForCreateInput
+  image: ImageFieldInput
 }
 
 input UserRelateToOneForCreateInput {
